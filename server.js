@@ -35,14 +35,14 @@ app.post("/submit-contacts" , async(request,response) =>{
         const transporter = nodemailer.createTransport({
             service:"gmail",
             auth:{
-                user:"process.env.EMAIL_USER",
-                pass:"process.env.EMAIL_PASS"
+                user:`${process.env.EMAIL_USER}`,
+                pass:`${process.env.EMAIL_PASS}`
             }
         });
 
         const emailOptions = {
-            from: "process.env.EMAIL_USER",
-            to:"process.env.EMAIL_USER",
+            from: `${process.env.EMAIL_USER}`,
+            to:`${process.env.EMAIL_USER}`,
             subject:"Content",
             html:`
                 <p><b>Bro.... </b><b>${name}<b> has sent you and email</p>

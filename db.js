@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const config = {
     connectionString:
-    `Driver={ODBC Driver 18 for SQL Server};Server=process.env.DATABASE_PASS;Database=MyContacts;Trusted_Connection=yes;Encrypt=no;TrustServerCertificate=yes`,
+    `Driver={ODBC Driver 18 for SQL Server};Server=${process.env.DATABASE_PASS};Database=MyContacts;Trusted_Connection=yes;Encrypt=no;TrustServerCertificate=yes`,
 };
 
 async function connectToTheDatabase(){
@@ -12,7 +12,7 @@ async function connectToTheDatabase(){
         await sql.connect(config);
         console.log("Database connected, good to go...");
     }catch(err){
-        console.log("Error in connecting: " , err);
+        console.log("Error in connecting: " , err.message);
     }
 }
 
