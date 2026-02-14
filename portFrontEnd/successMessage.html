@@ -8,17 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <p id="successMessage">Success Message</p>
+        <div class="boxContainer">
+            <p id="successMessage">Success Message</p>
+            <a href="/">Porfolio</a>
+        </div>
     </div>
-
-    <a href="/">Porfolio</a>
 
     <script>
         const params = new URLSearchParams(window.location.search);
 
         const name = params.get("name");
         
-        document.getElementById("successMessage").textContent =  `Thank you ${name} for reaching to my page, I will make a follow up by making a call or an email.`;
+        document.getElementById("successMessage").textContent = 
+        `Thank you ${name} for reaching to my Portfolio, I will make a follow up by making a call or an email, have a blessed day.`;
     </script>
 </body>
 </html>
