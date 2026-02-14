@@ -1,6 +1,8 @@
 const express = require("express");
 const {sql, connectToTheDatabase} = require("./db");
 const path = require("path");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const app = express();
 
@@ -28,8 +30,34 @@ app.post("/submit-contacts" , async(request,response) =>{
         INSERT INTO Contacts(Name,Phone,Email,Message)
         VALUES(${name},${phone},${email},${message})
         `;
+
+
+        const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:"process.env.EMAIL_USER",
+                pass:"process.env.EMAIL_PASS"
+            }
+        });
+
+        const emailOptions = {
+            from: "process.env.EMAIL_USER",
+            to:"process.env.EMAIL_USER",
+            subject:"Content",
+            html:`
+                <p><b>Bro.... </b><b>${name}<b> has sent you and email</p>
+                <b>Details</b>
+                <h3>Phone: ${phone}</h3>
+                <h3>Email: ${email}</h3>
+                <h3>Message: ${message}</h3>
+                `
+            };
+
+        transporter.sendMail(emailOptions);
+
         response.redirect(`/success?name=${encodeURIComponent(name)}`);
         //response.redirect(`/success?name=${encodeURIComponent(name)}`);
+     
     }catch(err){
         response.status(500).send("Error: " + err);
     }
