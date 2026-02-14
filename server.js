@@ -12,14 +12,12 @@ app.use(express.json());
 
 //form url "/submit-contacts"
 
-
-
-app.get("/home" , (request,response) =>{
-    response.send(path.join(__dirname,"portFrontEnd", "learnEveryday.html"));
+app.get("/" , (request,response) =>{
+    response.sendFile(path.join(__dirname,"portFrontEnd", "learnEveryday.html"));
 });
 
 app.get("/success" , (request,response)=>{
-    response.send(path.join(__dirname,"portFrontEnd","successMessage.html"));
+    response.sendFile(path.join(__dirname,"portFrontEnd","successMessage.html"));
 });
 
 app.post("/submit-contacts" , async(request,response) =>{
@@ -30,7 +28,7 @@ app.post("/submit-contacts" , async(request,response) =>{
         INSERT INTO Contacts(Name,Phone,Email,Message)
         VALUES(${name},${phone},${email},${message})
         `;
-        response.redirect(`/success?name=${encodeURIComponentcode(name)}`);
+        response.redirect(`/success?name=${encodeURIComponent(name)}`);
     }catch(err){
         response.status(500).send("Error: " + err);
     }
@@ -38,5 +36,5 @@ app.post("/submit-contacts" , async(request,response) =>{
 
 const Port = 3000;
 app.listen(Port, ()=>{
-    console.log(`This app is running on http://locahost:${Port}`);
+    console.log(`This app is running on http://localhost:${Port}`);
 });
