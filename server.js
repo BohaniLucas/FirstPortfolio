@@ -29,6 +29,7 @@ app.post("/submit-contacts" , async(request,response) =>{
         VALUES(${name},${phone},${email},${message})
         `;
         response.redirect(`/success?name=${encodeURIComponent(name)}`);
+        //response.redirect(`/success?name=${encodeURIComponent(name)}`);
     }catch(err){
         response.status(500).send("Error: " + err);
     }
