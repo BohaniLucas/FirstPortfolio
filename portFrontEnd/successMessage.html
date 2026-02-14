@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="everyday.css">
+</head>
+<body>
+    <div class="container">
+        <p id="successMessage">Success Message</p>
+    </div>
+
+    <a href="/home">Porfolio</a>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        const name = params.get("name");
+        document.getElementById("successMessage").textContent =  `Thank you ${name} for reaching to my page, I will make a follow up by making a call or an email.`;
+    </script>
+</body>
+</html>
