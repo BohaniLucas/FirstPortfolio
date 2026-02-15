@@ -31,7 +31,6 @@ app.post("/submit-contacts" , async(request,response) =>{
         VALUES(${name},${phone},${email},${message})
         `;
 
-
         const transporter = nodemailer.createTransport({
             service:"gmail",
             auth:{
@@ -39,6 +38,14 @@ app.post("/submit-contacts" , async(request,response) =>{
                 pass:`${process.env.EMAIL_PASS}`
             }
         });
+
+        const receiver = nodemailer.createTransport({
+            service: "gmail",
+            auth:{
+                user:`${process.env.EMAIL_USER}`,
+                pass:`${process.env.EMAIL_PASS}`
+            }
+        })
 
         const emailOptions = {
             from: `${process.env.EMAIL_USER}`,
@@ -52,6 +59,16 @@ app.post("/submit-contacts" , async(request,response) =>{
                 <h3>Message: ${message}</h3>
                 `
             };
+
+        const mailOptionsoforReceiver = {
+            from: `${process.env.EMAIL_USER}`,
+            to:`${email}`,
+            subject:`Message sent`,
+            html:`<p>Thank you <b>${name}<b> for reaching to my Portfolio, I will make a follow up by making a call or an email, have a blessed day.
+                </p>`
+        }
+
+        receiver.sendMail(mailOptionsoforReceiver);
 
         transporter.sendMail(emailOptions);
 
